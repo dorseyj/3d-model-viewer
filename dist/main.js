@@ -1,9 +1,9 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
-import {nodeObject} from "three/examples/jsm/renderers/nodes/ShaderNode";
-import {Object3D} from "three";
-import * as TWEEN from '@tweenjs/tween.js';
+import * as THREE from '../node_modules/three/build/three.module.js';
+import { OrbitControls } from '../node_modules/three/examples/js/controls/OrbitControls.js';
+import { OBJLoader } from "../node_modules/three/examples/jsm/loaders/OBJLoader.js";
+//mport {nodeObject} from "three/examples/jsm/renderers/nodes/ShaderNode";
+import {Object3D} from "../node_modules/three/build/three.module.js";
+import * as TWEEN from '../node_modules/@tweenjs/tween.js';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xfafafa);
