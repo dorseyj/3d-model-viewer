@@ -1,9 +1,9 @@
-import * as THREE from '/3d-model-viewer/node_modules/three/build/three.module.js';
-import { OrbitControls } from '/3d-model-viewer/node_modules/three/examples/js/controls/OrbitControls.js';
-import { OBJLoader } from "/3d-model-viewer/node_modules/three/examples/jsm/loaders/OBJLoader.js";
+import * as THREE from '/3d-model-viewer/nmodules/three/build/three.module.js';
+import { OrbitControls } from '/3d-model-viewer/modules/three/examples/js/controls/OrbitControls.js';
+import { OBJLoader } from "/3d-model-viewer/modules/three/examples/jsm/loaders/OBJLoader.js";
 //mport {nodeObject} from "three/examples/jsm/renderers/nodes/ShaderNode";
-import {Object3D} from "/3d-model-viewer/node_modules/three/build/three.module.js";
-import * as TWEEN from '/3d-model-viewer/node_modules/@tweenjs/tween.js';
+import {Object3D} from "/3d-model-viewer/modules/three/build/three.module.js";
+import * as TWEEN from '/3d-model-viewer/modules/@tweenjs/tween.js';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xfafafa);
