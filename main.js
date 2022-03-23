@@ -1,4 +1,4 @@
-import * as THREE from '/3d-model-viewer/nmodules/three/build/three.module.js';
+import * as THREE from '/3d-model-viewer/modules/three/build/three.module.js';
 import { OrbitControls } from '/3d-model-viewer/modules/three/examples/js/controls/OrbitControls.js';
 import { OBJLoader } from "/3d-model-viewer/modules/three/examples/jsm/loaders/OBJLoader.js";
 //mport {nodeObject} from "three/examples/jsm/renderers/nodes/ShaderNode";
