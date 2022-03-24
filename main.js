@@ -1,9 +1,8 @@
-import * as THREE from '/3d-model-viewer/modules/three/build/three.module.js';
-import { OrbitControls } from '/3d-model-viewer/modules/three/examples/js/controls/OrbitControls.js';
-import { OBJLoader } from "/3d-model-viewer/modules/three/examples/jsm/loaders/OBJLoader.js";
-//mport {nodeObject} from "three/examples/jsm/renderers/nodes/ShaderNode";
-import {Object3D} from "/3d-model-viewer/modules/three/build/three.module.js";
-import * as TWEEN from '/3d-model-viewer/modules/@tweenjs/tween.js';
+import * as THREE from 'https://cdn.skypack.dev/three@0.130.0/build/three.module.js';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.130.0//examples/jsm/controls/OrbitControls.js';
+import { OBJLoader } from "https://cdn.skypack.dev/three@0.130.0//examples/jsm/loaders/OBJLoader.js";
+import {Object3D} from "https://cdn.skypack.dev/three@0.130.0/build/three.module.js";
+import * as TWEEN from 'https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.esm.min.js';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xfafafa);
