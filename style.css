@@ -61,6 +61,22 @@ body {
 {
 
 }
+.loading-screen {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+}
+.loading-text {
+  position: absolute;
+  left: 46%;
+  top: 40%
+}
+.loading-icon {
+  position: absolute;
+  left: 46%;
+  top: 46%;
+}
 
 .stats-window
 {

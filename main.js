@@ -65,8 +65,13 @@ loader.load(
     },
     // called while loading is progressing
     function ( xhr ) {
-
+        var loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.visibility = "visible";
         console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        if ((xhr.loaded / xhr.total * 100 ) === 100)
+        {
+            loadingScreen.style.visibility = "hidden";
+        }
 
     },
     // called when loading has errors
@@ -76,7 +81,6 @@ loader.load(
 
     }
 );
-
 //For Debugging
 const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
