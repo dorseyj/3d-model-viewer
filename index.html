@@ -10,7 +10,12 @@
     <div class="title-bar-content-name">Plane.obj</div>
   </div>
 
-  <div class="canvas">
+
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-text">Loading 3D Object</div>
+    <img class="loading-icon" src="assets/icons/icons8-dots-loading.gif"/>
+  </div>
+  <div id="canvas" class="canvas">
     <div class="tool-bar">
       <img id="reset-button" src="assets/icons/replace-50.png" alt="reset" title="Reset" class="tool-bar-icon">
       <img id="pitch-button" src="assets/icons/pitch-icon.svg" alt="icon" title="Pitch" class="tool-bar-icon">
@@ -38,11 +43,6 @@
       <script type="module" src="/3d-model-viewer/main.js"></script>
       -->
       <script type="module" src="/3d-model-viewer/main.js"></script>
-      <div id="loading-screen" class="loading-screen">
-        <div class="loading-text">Loading 3D Object</div>
-        <img class="loading-icon" src="assets/icons/icons8-dots-loading.gif"/>
-      </div>
-
     </div>
     <div class="stats-window">
       <div class="stats-window-item">X-Axis: <span id="X-Axis">360</span>&#176;</div>

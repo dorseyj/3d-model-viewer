@@ -67,10 +67,14 @@ loader.load(
     function ( xhr ) {
         var loadingScreen = document.getElementById('loading-screen');
         loadingScreen.style.visibility = "visible";
+
+        var canvas = document.getElementById('canvas');
+        canvas.style.visibility = "hidden";
         console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         if ((xhr.loaded / xhr.total * 100 ) === 100)
         {
             loadingScreen.style.visibility = "hidden";
+            canvas.style.visibility = "visible";
         }
 
     },

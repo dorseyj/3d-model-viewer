@@ -23,6 +23,10 @@ body {
 .title-bar-content-name{
   text-align: center;
 }
+
+.canvas {
+  visibility: hidden;
+}
 .tool-bar{
   position: absolute;
   align-content: center;
