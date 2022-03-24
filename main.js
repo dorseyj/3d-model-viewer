@@ -32,7 +32,7 @@ scene.add(HemisphereLight);
 
 //Load texture
 var textureLoader = new THREE.TextureLoader();
-var map = textureLoader.load('assets/Bucket3Albedo.png');
+var map = textureLoader.load('assets/texture-07.svg');
 var material = new THREE.MeshPhongMaterial({map: map});
 
 // Instantiate a loader
