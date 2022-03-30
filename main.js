@@ -22,7 +22,7 @@ const controls = new OrbitControls( camera, renderer.domElement );
 camera.position.z = 5;
 controls.update();
 
-
+//Loading lights
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 0, 1);
 scene.add(light);
@@ -59,6 +59,9 @@ loader.load(
         //Scale object
         object.scale.set(0.005,0.005,0.005);
         obj = object;
+        //obj.children[10].scale.set(0.6,0.6,0.6);
+        //obj.children[11].scale.set(0.6,0.6,0.6);
+        //obj.children[12].scale.set(0.6,0.6,0.6);
         //Add object to scene
         scene.add(object);
 
@@ -80,7 +83,9 @@ loader.load(
     },
     // called when loading has errors
     function ( error ) {
-
+        var errorScreen = document.getElementById('error-screen');
+        loadingScreen.style.visibility = "hidden";
+        errorScreen.style.visibility = "visible";
         console.log( 'An error happened' );
 
     }
@@ -88,48 +93,6 @@ loader.load(
 //For Debugging
 const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
-
-
-var animationnum = 0;
-var rotateDegree = THREE.Math.degToRad(30);
-var start = { num: 0};
-var target = { num: rotateDegree};
-
-var tweenPitch = new TWEEN.Tween(start).to(target, 1000);
-const pitchUpdate = function () {
-    obj.rotation.z = start.num;
-};
-tweenPitch.onUpdate(pitchUpdate);
-
-var tweenYaw = new TWEEN.Tween(start).to(target, 1000);
-const yawUpdate = function () {
-    obj.rotation.y = start.num;
-};
-tweenYaw.onUpdate(yawUpdate);
-
-var tweenRoll = new TWEEN.Tween(start).to(target, 1000);
-const rollUpdate = function () {
-    obj.rotation.x = start.num;
-};
-tweenRoll.onUpdate(rollUpdate);
-
-
-//tweenPitch.duration(3000);
-
-
-
-var pitchButton = document.getElementById('pitch-button');
-pitchButton.onclick = function(){
-    animationnum = 1;
-};
-var rollButton = document.getElementById('roll-button');
-rollButton.onclick = function(){
-    animationnum = 2;
-};
-var yawButton = document.getElementById('yaw-button');
-yawButton.onclick = function(){
-    animationnum = 3;
-};
 
 
 //Controls the Wing and Tail sliders
@@ -187,6 +150,67 @@ resetButton.onclick = function(){
 };
 
 
+//Animation Inputs Begin
+var animationnum = 0;
+var rotateDegree = THREE.Math.degToRad(30);
+var rotateNegative = THREE.Math.degToRad(-30);
+var start = { num: 0};
+var target = { num: rotateDegree};
+var negTarget = { num: rotateNegative};
+
+//Pitch
+var tweenPitch = new TWEEN.Tween(start).to(target, 1000);
+const pitchUpdate = function () {
+    obj.rotation.z = start.num;
+};
+tweenPitch.onUpdate(pitchUpdate);
+
+var tweenPitchNeg = new TWEEN.Tween(start).to(negTarget, 1000);
+const pitchUpdateNeg = function () {
+    obj.rotation.z = start.num;
+};
+tweenPitchNeg.onUpdate(pitchUpdateNeg);
+
+//Yaw
+var tweenYaw = new TWEEN.Tween(start).to(target, 1000);
+const yawUpdate = function () {
+    obj.rotation.y = start.num;
+};
+tweenYaw.onUpdate(yawUpdate);
+
+var tweenYawNeg = new TWEEN.Tween(start).to(negTarget, 1000);
+const yawUpdateNeg = function () {
+    obj.rotation.z = start.num;
+};
+tweenYawNeg.onUpdate(yawUpdateNeg);
+
+//Roll
+var tweenRoll = new TWEEN.Tween(start).to(target, 1000);
+const rollUpdate = function () {
+    obj.rotation.x = start.num;
+};
+tweenRoll.onUpdate(rollUpdate);
+
+var tweenRollNeg = new TWEEN.Tween(start).to(negTarget, 1000);
+const rollUpdateNeg = function () {
+    obj.rotation.z = start.num;
+};
+tweenRollNeg.onUpdate(rollUpdateNeg);
+
+var pitchButton = document.getElementById('pitch-button');
+pitchButton.onclick = function(){
+    animationnum = 1;
+};
+var rollButton = document.getElementById('roll-button');
+rollButton.onclick = function(){
+    animationnum = 2;
+};
+var yawButton = document.getElementById('yaw-button');
+yawButton.onclick = function(){
+    animationnum = 3;
+};
+
+
 
 
 
@@ -197,20 +221,49 @@ function animate()
     TWEEN.update();
     renderer.render(scene, camera);
 
+
+    var wingFromCenter = Math.abs(wing_pos.value - 50);
+    //Slowest 3000ms, Fastest 450ms
+    var duration = 3000 - (wingFromCenter*51);
+
     switch (animationnum) {
         case 1:
-            tweenPitch.duration(3000);
-            tweenPitch.start();
+            if (wing_pos.value >= 50)
+            {
+                tweenPitch.duration(duration);
+                tweenPitch.start();
+            }
+            else
+            {
+                tweenPitchNeg.duration(duration);
+                tweenPitchNeg.start();
+            }
             animationnum = 0;
             break;
         case 2:
-            tweenRoll.duration(3000);
-            tweenRoll.start();
+            if (wing_pos.value >= 50)
+            {
+                tweenRoll.duration(duration);
+                tweenRoll.start();
+            }
+            else
+            {
+                tweenRollNeg.duration(duration);
+                tweenRollNeg.start();
+            }
             animationnum = 0;
             break;
         case 3:
-            tweenYaw.duration(3000);
-            tweenYaw.start();
+            if (wing_pos.value >= 50)
+            {
+                tweenYaw.duration(duration);
+                tweenYaw.start();
+            }
+            else
+            {
+                tweenYawNeg.duration(duration);
+                tweenYawNeg.start();
+            }
             animationnum = 0;
             break;
 
@@ -219,7 +272,8 @@ function animate()
     }
 
     //Display Values to stats-window
-    document.getElementById("X-Axis").innerHTML = Math.round(THREE.Math.radToDeg(obj.rotation.x));
+    document.getElementById("X-Axis").innerHTML = wingFromCenter;
+        //Math.round(THREE.Math.radToDeg(obj.rotation.x));
     document.getElementById("Y-Axis").innerHTML = Math.round(THREE.Math.radToDeg(obj.rotation.y));
     document.getElementById("Z-Axis").innerHTML = Math.round(THREE.Math.radToDeg(obj.rotation.z));
     controls.update();
