@@ -73,6 +73,7 @@ loader.load(
 
         var canvas = document.getElementById('canvas');
         canvas.style.visibility = "hidden";
+        var errorScreen = document.getElementById('error-screen');
         errorScreen.style.visibility = "hidden";
         console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         if ((xhr.loaded / xhr.total * 100 ) === 100)
