@@ -7,7 +7,7 @@
   </head>
   <div class="title-bar">
     <div class="title-bar-title">3D Model Viewer</div>
-    <div class="title-bar-content-name">Plane.obj</div>
+    <div class="title-bar-content-name">EAS 4400 Static Stability</div>
   </div>
 
 
@@ -22,11 +22,17 @@
     </div>
   </div>
   <div id="canvas" class="canvas">
-    <div class="tool-bar">
+    <div class="tool-bar" id="tool-bar">
       <img id="reset-button" src="assets/icons/replace-50.png" alt="reset" title="Reset" class="tool-bar-icon">
-      <img id="pitch-button" src="assets/icons/pitch-icon.svg" alt="icon" title="Pitch" class="tool-bar-icon">
+      <img id="fit-button" src="assets/icons/full-page-view-50.png" alt="Fit to Screen" title="Fit to Screen" class="tool-bar-icon">
       <img id="roll-button" src="assets/icons/roll-icon.svg" alt="icon" title="Roll" class="tool-bar-icon">
       <img id="yaw-button" src="assets/icons/yaw-icon.svg" alt="icon" title="Yaw" class="tool-bar-icon">
+      <div id="pitch-button" class="tool-bar-animate">
+        <img src="assets/icons/wind-animate.png" alt="icon" title="Pitch" class="icon-static">
+        <img src="assets/icons/wind-animate-hover2.gif" alt="icon" title="Pitch" class="icon-move">
+        <img src="assets/icons/wind-animate-hover-top.png" alt="icon" title="Pitch" class="icon-move-top">
+      </div>
+
     </div>
     <div class="debug-bar">
       <a href="#" id="x">X</a>
@@ -51,9 +57,14 @@
       <script type="module" src="/3d-model-viewer/main.js"></script>
     </div>
     <div class="stats-window">
-      <div class="stats-window-item">X-Axis: <span id="X-Axis">360</span>&#176;</div>
-      <div class="stats-window-item">Y-Axis: <span id="Y-Axis">360</span>&#176;</div>
-      <div class="stats-window-item">Z-Axis: <span id="Z-Axis">360</span>&#176;</div>
+      <div class="stats-window-item">Wing: <span id="Wing-Distance">0 </span></div>
+      <div class="stats-window-item">Tail: <span id="Tail-Distance">0</span></div>
+      <div class="stats-window-item">Moment: <span id="Moment">0</span></div>
+      <p>
+      <div class="stats-window-item">Roll: <span id="X-Axis">360</span>&#176;</div>
+      <div class="stats-window-item">Yaw: <span id="Y-Axis">360</span>&#176;</div>
+      <div class="stats-window-item">Pitch: <span id="Z-Axis">360</span>&#176;</div>
+      </p>
     </div>
   </div>
   <div class="scroll-strip"></div>
@@ -63,6 +74,7 @@
      Developed by Shire Development Team
       <div class="citations">
       Icons provided by <a href="https://icons8.com">Icons8</a>
+        <p><button type="button" id="exper-button">Experimental Features</button></p>
     </div>
       <p>Members: Joseph Dorsey, Jared Bowen</p>
     </div>

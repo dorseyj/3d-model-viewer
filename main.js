@@ -75,6 +75,14 @@ loader.load(
         canvas.style.visibility = "hidden";
         var errorScreen = document.getElementById('error-screen');
         errorScreen.style.visibility = "hidden";
+
+        var htmlYawButton = document.getElementById('yaw-button');
+        htmlYawButton.style.display = "none";
+
+        var htmlRollButton = document.getElementById('roll-button');
+        htmlRollButton.style.display = "none";
+
+
         console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         if ((xhr.loaded / xhr.total * 100 ) === 100)
         {
@@ -151,6 +159,15 @@ resetButton.onclick = function(){
     tweenPitch.stop();
 };
 
+var fitToScreenButton = document.getElementById('fit-button');
+fitToScreenButton.onclick = function () {
+    var origin = new THREE.Spherical(0, 0, 0);
+    origin.setFromCartesianCoords(camera.position.x, camera.position.y, camera.position.z);
+    origin.radius = 5;
+    camera.position.setFromSpherical(origin);
+
+};
+
 
 //Animation Inputs Begin
 var animationnum = 0;
@@ -182,7 +199,7 @@ tweenYaw.onUpdate(yawUpdate);
 
 var tweenYawNeg = new TWEEN.Tween(start).to(negTarget, 1000);
 const yawUpdateNeg = function () {
-    obj.rotation.z = start.num;
+    obj.rotation.y= start.num;
 };
 tweenYawNeg.onUpdate(yawUpdateNeg);
 
@@ -195,7 +212,7 @@ tweenRoll.onUpdate(rollUpdate);
 
 var tweenRollNeg = new TWEEN.Tween(start).to(negTarget, 1000);
 const rollUpdateNeg = function () {
-    obj.rotation.z = start.num;
+    obj.rotation.x = start.num;
 };
 tweenRollNeg.onUpdate(rollUpdateNeg);
 
@@ -203,6 +220,56 @@ var pitchButton = document.getElementById('pitch-button');
 pitchButton.onclick = function(){
     animationnum = 1;
 };
+
+var experimentalButton = document.getElementById('exper-button');
+experimentalButton.onclick = function(){
+    var htmlResetButton = document.getElementById('reset-button');
+    var htmlFitButton = document.getElementById('fit-button');
+    var htmlPitchButton = document.getElementById('pitch-button');
+    var htmlRollButton = document.getElementById('roll-button');
+    var htmlYawButton = document.getElementById('yaw-button');
+    var toolBarBox = document.getElementById('tool-bar');
+
+    if (htmlYawButton.style.display === "none")
+    {
+        htmlYawButton.style.display = "inline";
+        htmlRollButton.style.display = "inline";
+        htmlResetButton.style.width = "10%";
+        htmlYawButton.style.width = "10%";
+        htmlRollButton.style.width = "10%";
+        htmlFitButton.style.width = "10%";
+        htmlPitchButton.style.width = "10%";
+
+        htmlResetButton.style.marginLeft = "3%";
+        htmlYawButton.style.marginLeft = "3%";
+        htmlRollButton.style.marginLeft = "3%";
+        htmlFitButton.style.marginLeft = "3%";
+        htmlPitchButton.style.marginLeft = "3%";
+        toolBarBox.style.height = "8%";
+
+
+    }
+    else
+    {
+        htmlYawButton.style.display = "none";
+        htmlRollButton.style.display = "none";
+
+        htmlResetButton.style.width = "20%";
+        htmlYawButton.style.width = "20%";
+        htmlRollButton.style.width = "20%";
+        htmlFitButton.style.width = "20%";
+        htmlPitchButton.style.width = "20%";
+
+        htmlResetButton.style.marginLeft = "10%";
+        htmlYawButton.style.marginLeft = "10%";
+        htmlRollButton.style.marginLeft = "10%";
+        htmlFitButton.style.marginLeft = "10%";
+        htmlPitchButton.style.marginLeft = "5%";
+        toolBarBox.style.height = "7%";
+    }
+};
+//############ The Yaw and Roll Functionality ############
+
 var rollButton = document.getElementById('roll-button');
 rollButton.onclick = function(){
     animationnum = 2;
@@ -213,10 +280,6 @@ yawButton.onclick = function(){
 };
 
 
-
-
-
-
 function animate()
 {
     requestAnimationFrame(animate);
@@ -224,13 +287,17 @@ function animate()
     renderer.render(scene, camera);
 
 
-    var wingFromCenter = Math.abs(wing_pos.value - 50);
-    //Slowest 3000ms, Fastest 450ms
-    var duration = 3000 - (wingFromCenter*51);
+    var wingOffset = wing_pos.value - 50;
+    var tailOffset = Math.round((100 - tail_pos.value)/2);
+    if (tailOffset == 0)
+        tailOffset = 1;
+
+    var moment =(10*wingOffset) - (tailOffset);
+    var duration = 3000 - Math.round((Math.abs(moment))*4.8);
 
     switch (animationnum) {
         case 1:
-            if (wing_pos.value >= 50)
+            if (moment > 0)
             {
                 tweenPitch.duration(duration);
                 tweenPitch.start();
@@ -243,7 +310,8 @@ function animate()
             animationnum = 0;
             break;
         case 2:
-            if (wing_pos.value >= 50)
+            console.log(2);
+            if (moment > 0)
             {
                 tweenRoll.duration(duration);
                 tweenRoll.start();
@@ -256,7 +324,7 @@ function animate()
             animationnum = 0;
             break;
         case 3:
-            if (wing_pos.value >= 50)
+            if (moment > 0)
             {
                 tweenYaw.duration(duration);
                 tweenYaw.start();
@@ -274,10 +342,15 @@ function animate()
     }
 
     //Display Values to stats-window
-    document.getElementById("X-Axis").innerHTML = wingFromCenter;
-        //Math.round(THREE.Math.radToDeg(obj.rotation.x));
+    document.getElementById("Moment").innerHTML = moment;
+    document.getElementById("Wing-Distance").innerHTML = wingOffset;
+    document.getElementById("Tail-Distance").innerHTML = tailOffset;
+
+    document.getElementById("X-Axis").innerHTML = Math.round(THREE.Math.radToDeg(obj.rotation.x));
     document.getElementById("Y-Axis").innerHTML = Math.round(THREE.Math.radToDeg(obj.rotation.y));
     document.getElementById("Z-Axis").innerHTML = Math.round(THREE.Math.radToDeg(obj.rotation.z));
+    var a = new THREE.Vector3( 0, 0, 0 );
+    document.getElementById("Wing").innerHTML = camera.position;
     controls.update();
 }
 
