@@ -144,18 +144,19 @@ body {
 {
   background-color: #ffffff;
   position: absolute;
-  width: 20%;
+  width: 27%;
   height: 10%;
   padding-top: 1%;
   bottom: 5%;
-  right: 10%;
+  right: 5%;
   align-content: center;
   border-style: solid;
   border-color: #dbdbdb;
 
 }
 .stats-window-item{
-  padding-left: 5%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
   display: inline-block;
 }
 
