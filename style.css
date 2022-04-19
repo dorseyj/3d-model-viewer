@@ -31,6 +31,7 @@ body {
   position: absolute;
   background-color: #ffffff;
   margin-top: 1.5%;
+  margin-bottom: 1.5%;
   margin-left: 2%;
   padding-top: 0.5%;
   height: 7%;
@@ -142,6 +143,7 @@ body {
 
 .stats-window
 {
+  font-size: 1.1vw;
   background-color: #ffffff;
   position: absolute;
   width: 27%;
@@ -168,6 +170,7 @@ body {
   width: 25%;
 }
 .slider-text{
+  font-size: 1vw;
   margin-bottom: 4%;
 }
 
